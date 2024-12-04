@@ -8,7 +8,7 @@ part of 'image_model.dart';
 
 _$ImageModelImpl _$$ImageModelImplFromJson(Map<String, dynamic> json) =>
     _$ImageModelImpl(
-      id: (json['id'] as num?)?.toInt() ?? 0,
+      id: json['id'] as String? ?? "",
       author: json['author'] as String? ?? "",
       width: (json['width'] as num?)?.toInt() ?? 0,
       height: (json['height'] as num?)?.toInt() ?? 0,

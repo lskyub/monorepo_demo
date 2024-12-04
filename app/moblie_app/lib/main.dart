@@ -72,7 +72,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   void test() async {
     var result = await ref.read(mainViewModelProvider.notifier).fetchUser();
-    print(result);
+    print("${result.statusCode} : ${result.model}");
   }
 
   @override

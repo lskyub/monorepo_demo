@@ -20,7 +20,7 @@ ImageModel _$ImageModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ImageModel {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   int get width => throw _privateConstructorUsedError;
   int get height => throw _privateConstructorUsedError;
@@ -44,7 +44,7 @@ abstract class $ImageModelCopyWith<$Res> {
       _$ImageModelCopyWithImpl<$Res, ImageModel>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String author,
       int width,
       int height,
@@ -78,7 +78,7 @@ class _$ImageModelCopyWithImpl<$Res, $Val extends ImageModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$$ImageModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String author,
       int width,
       int height,
@@ -144,7 +144,7 @@ class __$$ImageModelImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
@@ -173,7 +173,7 @@ class __$$ImageModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ImageModelImpl implements _ImageModel {
   _$ImageModelImpl(
-      {this.id = 0,
+      {this.id = "",
       this.author = "",
       this.width = 0,
       this.height = 0,
@@ -185,7 +185,7 @@ class _$ImageModelImpl implements _ImageModel {
 
   @override
   @JsonKey()
-  final int id;
+  final String id;
   @override
   @JsonKey()
   final String author;
@@ -244,7 +244,7 @@ class _$ImageModelImpl implements _ImageModel {
 
 abstract class _ImageModel implements ImageModel {
   factory _ImageModel(
-      {final int id,
+      {final String id,
       final String author,
       final int width,
       final int height,
@@ -255,7 +255,7 @@ abstract class _ImageModel implements ImageModel {
       _$ImageModelImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get author;
   @override

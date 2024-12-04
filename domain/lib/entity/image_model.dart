@@ -6,7 +6,7 @@ part 'image_model.g.dart';
 @freezed
 class ImageModel with _$ImageModel {
   factory ImageModel({
-        @Default(0) int id,
+        @Default("") String id,
         @Default("") String author,
         @Default(0) int width,
         @Default(0) int height,
