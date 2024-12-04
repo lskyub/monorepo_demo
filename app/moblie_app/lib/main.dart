@@ -76,7 +76,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var list = ref.read(mainViewModelProvider.notifier).list;
+    var list = ref.watch(mainViewModelProvider);
     print("${list.length} > ${list}");
     callApi();
     // This method is rerun every time setState is called, for instance as done
