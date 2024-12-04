@@ -1,0 +1,6 @@
+name: melos_demo
+packages:
+  - app/**
+  - data/**
+  - domain/**
+  - design_system/**
