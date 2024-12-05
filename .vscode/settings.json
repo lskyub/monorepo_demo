@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/.dart_tool": true,
+        "**/.idea": true,
+        "**/*.iml": true,
+        "**/build": true,
+        "**/pubspec.lock": true
+    }
+}

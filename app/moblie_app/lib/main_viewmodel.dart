@@ -1,15 +1,14 @@
 import 'package:domain/entity/image_model.dart';
 import 'package:domain/usecase/image_usecase.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:moblie_app/providers.dart';
 
 class MainViewModel extends StateNotifier<List<ImageModel>> {
-  final GetImageList getImageList;
+  final GetImageList getImageLists;
 
-  MainViewModel(this.getImageList) : super([]);
+  MainViewModel(this.getImageLists) : super([]);
 
   void fetchUser() async {
-    var response = await getImageList.call();
+    var response = await getImageLists.call();
     if (response.statusCode == 200) {
       state = response.model;
     }
@@ -19,5 +18,6 @@ class MainViewModel extends StateNotifier<List<ImageModel>> {
 // ViewModel Provider
 final mainViewModelProvider =
     StateNotifierProvider<MainViewModel, List<ImageModel>>((ref) {
+      ref.watch(getImageList);
   return MainViewModel(ref.watch(getImageList));
 });
