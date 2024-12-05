@@ -57,16 +57,12 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
-
-  void callApi() {
-    ref.read(mainViewModelProvider.notifier).fetchUser();
-  }
-
   @override
   Widget build(BuildContext context) {
     var list = ref.watch(mainViewModelProvider);
-    print("${list.length} > ${list}");
-    callApi();
+    if(list.isEmpty){
+      ref.read(mainViewModelProvider.notifier).fetchUser();
+    }
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
