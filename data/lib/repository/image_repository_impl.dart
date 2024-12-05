@@ -4,7 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:domain/entity/image_model.dart';
 import 'package:domain/entity/response.dart';
 
+final imageRepository = Provider<ImagesRepository>((ref) {
+  return ImageRepositoryImpl(ref);
+});
+
 class ImageRepositoryImpl extends ImagesRepository {
+  // @override
   ImageRepositoryImpl(Ref ref) {
     _imageDataSource = ref.watch(imageDataSource);
   }
