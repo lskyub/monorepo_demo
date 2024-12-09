@@ -1,0 +1,32 @@
+name: Widgetbook Cloud Hosting
+on: push
+
+jobs:
+  widgetbook-cloud-hosting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup flutter
+        uses: subosito/flutter-action@v2
+        with:
+            channel: stable
+
+      - name: Bootstrap App
+        run: |
+            flutter pub get
+            # Add any other steps needed to make your
+            # app widgets available for Widgetbook
+
+      - name: Build Widgetbook
+        run: |
+            flutter pub get
+            dart run build_runner build -d
+            flutter build web -t widgetbook/widgetbook.dart
+
+      - name: Install Widgetbook CLI
+        run: dart pub global activate widgetbook_cli
+
+      - name: Push Widgetbook Build
+        run: widgetbook cloud build push --api-key 7da121bbc069ba43566b11e822e3d64f0e6a01ce4d0e8c3fe41f1fc8a5d24366

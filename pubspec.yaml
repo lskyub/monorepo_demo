@@ -11,11 +11,17 @@ dependencies:
   flutter:
     sdk: flutter
   melos: ^6.2.0
+
+  widgetbook: ^3.10.0
+  widgetbook_annotation: ^3.2.0
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+
+  widgetbook_cli: ^3.4.3
+  widgetbook_generator: ^3.9.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
