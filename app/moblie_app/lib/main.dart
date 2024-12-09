@@ -18,6 +18,7 @@ final GoRouter _goRoute = GoRouter(
         return Scaffold(
           body: navigationShell,
           bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Colors.white,
             currentIndex: navigationShell.currentIndex,
             selectedItemColor: const Color.fromARGB(255, 0, 0, 0),
             unselectedItemColor: const Color.fromARGB(255, 172, 172, 172),
