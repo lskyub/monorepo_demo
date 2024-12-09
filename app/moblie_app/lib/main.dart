@@ -1,18 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:moblie_app/ui/home.dart';
+import 'package:moblie_app/ui/more.dart';
+import 'package:moblie_app/ui/myway.dart';
+import 'package:moblie_app/ui/reward.dart';
+
+// private navigators
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+
+final GoRouter _goRoute = GoRouter(
+  initialLocation: '/home',
+  navigatorKey: _rootNavigatorKey,
+  routes: [
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return Scaffold(
+          body: navigationShell,
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: navigationShell.currentIndex,
+            selectedItemColor: const Color.fromARGB(255, 0, 0, 0),
+            unselectedItemColor: const Color.fromARGB(255, 172, 172, 172),
+            type: BottomNavigationBarType.fixed,
+            onTap: (int index) {
+              navigationShell.goBranch(index);
+            },
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.auto_stories), label: "마이웨이"),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: "홈"),
+              BottomNavigationBarItem(icon: Icon(Icons.workspace_premium), label: "혜택"),
+              BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "더 보기"),
+            ],
+          ),
+        );
+      },
+      branches: [
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/myway',
+            builder: (context, state) => const MywayScreen(),
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/home',
+            builder: (context, state) => const HomeScreen(),
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/reward',
+            builder: (context, state) => const RewardScreen(),
+          ),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/more',
+            builder: (context, state) => const MoreScreen(),
+          )
+        ])
+      ],
+    )
+  ],
+);
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -33,7 +94,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Home(),
+      routerConfig: _goRoute,
     );
   }
 }

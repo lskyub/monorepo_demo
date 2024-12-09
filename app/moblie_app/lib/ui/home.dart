@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moblie_app/ui/home_viewmodel.dart';
+import 'package:moblie_app/utils/remove_glow_behavior.dart';
+import 'package:moblie_app/utils/snap/snap.dart';
+import 'package:moblie_app/utils/snap/snap_scroll_physics.dart';
+import 'package:moblie_app/widget/common_header.dart';
+import 'package:moblie_app/widget/home/home_action.dart';
+import 'package:moblie_app/widget/home/home_diff.dart';
+import 'package:moblie_app/widget/home/home_notice.dart';
+import 'package:moblie_app/widget/home/home_stats.dart';
 
-class Home extends ConsumerStatefulWidget {
-  const Home({super.key});
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  ConsumerState<Home> createState() => _HomeState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeState extends ConsumerState<Home> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var list = ref.watch(mainViewModelProvider);
@@ -23,20 +31,36 @@ class _HomeState extends ConsumerState<Home> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(""),
-      ),
-      body: ListView.builder(
-          itemCount: list.length,
-          itemBuilder: (context, index) {
-            return Text("${list[index].id}", style: TextStyle(color: Colors.black),);
-          }), // This trailing comma makes auto-formatting nicer for build methods.
+      backgroundColor: const Color.fromARGB(255, 242, 243, 245),
+      body: SafeArea(
+          child: CustomScrollView(
+        physics: SnapScrollPhysics(snaps: [Snap.avoidZone(0, 50)]),
+        scrollBehavior: RemoveScrollGlowBehavior(),
+        slivers: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: false,
+            delegate: HeaderDelegate(),
+          ),
+          const SliverToBoxAdapter(
+            child: HomeAction(step: "0"),
+          ),
+          const SliverToBoxAdapter(
+            child: HomeStats(step: "0"),
+          ),
+          const  SliverToBoxAdapter(
+            child: HomeDiff(step: "0"),
+          ),
+          const  SliverToBoxAdapter(
+            child: HomeNotice(step: "0"),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(
+              height: 40,
+            ),
+          )
+        ],
+      )),
     );
   }
 }
